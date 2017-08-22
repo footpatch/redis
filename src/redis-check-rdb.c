@@ -193,6 +193,7 @@ int redis_check_rdb(char *rdbfilename, FILE *fp) {
     buf[9] = '\0';
     if (memcmp(buf,"REDIS",5) != 0) {
         rdbCheckError("Wrong signature trying to load DB from file");
+        close(fp);
         return 1;
     }
     rdbver = atoi(buf+5);
